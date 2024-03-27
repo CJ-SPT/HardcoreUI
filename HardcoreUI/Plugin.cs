@@ -1,12 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using System.IO;
-using System;
-using UnityEngine;
-using System.Reflection;
-using Comfort.Common;
-using EFT.UI;
-using StashSearch.Config;
 using StashSearch.Patches;
 
 #pragma warning disable
@@ -25,9 +19,6 @@ namespace StashSearch
             DontDestroyOnLoad(this);
 
             Log = Logger;
-
-            StashSearchConfig.InitConfig(Config);
-
 
             new ContainersPanelShowPatch().Enable();
            

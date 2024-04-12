@@ -17,8 +17,17 @@ namespace StashSearch.Patches
         }
 
         [PatchPostfix]
-        public static void PatchPostfix(ContainersPanel __instance, Dictionary<EquipmentSlot, SlotView> ___dictionary_0, SlotView ____defaultSlotTemplate)
+        public static void PatchPostfix(ContainersPanel __instance, EquipmentClass equipment, Dictionary<EquipmentSlot, SlotView> ___dictionary_0, 
+            InventoryControllerClass inventoryController)
         {
+            Slot slot = equipment.GetSlot(EquipmentSlot.SecuredContainer);
+            IItemOwner owner = slot.ParentItem.Parent.GetOwner();
+
+            if (owner != inventoryController)
+            {
+                return;
+            }
+
             ___dictionary_0[EquipmentSlot.SecuredContainer].gameObject.SetActive(false);
 
             foreach (var rectTransform in ___dictionary_0[EquipmentSlot.Pockets].GetComponentsInChildren(typeof(RectTransform)))
